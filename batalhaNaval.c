@@ -38,3 +38,67 @@ int main() {
 
     return 0;
 }
+#include <stdio.h>
+
+#define TAMANHO_TABULEIRO 10
+#define TAMANHO_NAVIO 3
+
+int main() {
+    int tabuleiro[TAMANHO_TABULEIRO][TAMANHO_TABULEIRO];
+        int navio_horizontal[TAMANHO_NAVIO] = {3, 3, 3};
+            int navio_vertical[TAMANHO_NAVIO] = {3, 3, 3};
+
+                // Inicializa o tabuleiro com 0 (água)
+                    for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+                            for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+                                        tabuleiro[i][j] = 0;
+                                                }
+                                                    }
+
+                                                        // Escolhe posição inicial para o navio horizontal
+                                                            int linha_h = 2;
+                                                                int coluna_h = 4;
+
+                                                                    // Verifica se o navio cabe no tabuleiro horizontalmente
+                                                                        if (coluna_h + TAMANHO_NAVIO <= TAMANHO_TABULEIRO) {
+                                                                                for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                                                                                            tabuleiro[linha_h][coluna_h + i] = navio_horizontal[i];
+                                                                                                    }
+                                                                                                        }
+
+                                                                                                            // Escolhe posição inicial para o navio vertical
+                                                                                                                int linha_v = 5;
+                                                                                                                    int coluna_v = 6;
+
+                                                                                                                        // Garante que os navios não se sobrepõem
+                                                                                                                            int sobreposicao = 0;
+                                                                                                                                if (linha_v + TAMANHO_NAVIO <= TAMANHO_TABULEIRO) {
+                                                                                                                                        for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                                                                                                                                                    if (tabuleiro[linha_v + i][coluna_v] != 0) {
+                                                                                                                                                                    sobreposicao = 1;
+                                                                                                                                                                                    break;
+                                                                                                                                                                                                }
+                                                                                                                                                                                                        }
+
+                                                                                                                                                                                                                // Se não houver sobreposição, posiciona o navio vertical
+                                                                                                                                                                                                                        if (!sobreposicao) {
+                                                                                                                                                                                                                                    for (int i = 0; i < TAMANHO_NAVIO; i++) {
+                                                                                                                                                                                                                                                    tabuleiro[linha_v + i][coluna_v] = navio_vertical[i];
+                                                                                                                                                                                                                                                                }
+                                                                                                                                                                                                                                                                        } else {
+                                                                                                                                                                                                                                                                                    printf("Erro: Sobreposição de navios detectada!\n");
+                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                }
+
+                                                                                                                                                                                                                                                                                                    // Exibe o tabuleiro
+                                                                                                                                                                                                                                                                                                        printf("Tabuleiro Batalha Naval (0 = água, 3 = navio):\n\n");
+                                                                                                                                                                                                                                                                                                            for (int i = 0; i < TAMANHO_TABULEIRO; i++) {
+                                                                                                                                                                                                                                                                                                                    for (int j = 0; j < TAMANHO_TABULEIRO; j++) {
+                                                                                                                                                                                                                                                                                                                                printf("%d ", tabuleiro[i][j]);
+                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                printf("\n");
+                                                                                                                                                                                                                                                                                                                                                    }
+
+                                                                                                                                                                                                                                                                                                                                                        return 0;
+                                                                                                                                                                                                                                                                                                                                                        }
+                                                                                                                                                                                                                                                                                                                                                    
